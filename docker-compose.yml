@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  dl_database:
+    container_name: dl_database
+    image: postgres:12-alpine
+    ports: ["5432:5432"]
+    networks: [dl_net]
+    env_file: [".env"]
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    logging:
+      driver: "none"
+
+  dl_app:
+    image: dl_app:latest
+    container_name: dl_app
+    build:
+      context: ./backend
+    command: sh container/start
+    volumes: ["./backend:/dl_app"]
+    ports: ["3000:3000"]
+    networks: [dl_net]
+    env_file: [".env"]
+    links: [dl_database]
+    depends_on: [dl_database]
+
+  dl_client:
+    image: dl_client:latest
+    container_name: dl_client
+    build:
+      context: ./client
+    command: sh container/start
+    volumes:
+      ["./client:/dl_client", "./client/node_modules:/dl_client/node_modules"]
+    ports: ["3001:3001"]
+    networks: [dl_net]
+    env_file: [".env"]
+    links: [dl_app]
+    depends_on: [dl_app]
+
+volumes:
+  postgres:
+
+networks:
+  dl_net:
+    driver: bridge
