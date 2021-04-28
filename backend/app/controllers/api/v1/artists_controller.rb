@@ -1,4 +1,5 @@
 class Api::V1::ArtistsController < ApplicationController
+  before_action :authorize_access_request!, expect: [:show, :index]
   before_action :set_artist, only: [:show, :update, :destroy]
 
   # GET /api/v1/artists
@@ -46,6 +47,6 @@ class Api::V1::ArtistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def artist_params
-      params.require(:artist).permit(:name, :user_id)
+      params.require(:artist).permit(:name)
     end
 end
