@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "home#index"
+  root to: 'home#index'
 
   namespace :api do
     namespace :v1 do
@@ -7,4 +7,9 @@ Rails.application.routes.draw do
       resources :records
     end
   end
+
+  post   'refresh', controller: :refresh, action: :create
+  post   'signin',  controller: :refresh, action: :create
+  post   'signup',  controller: :refresh, action: :create
+  delete 'signin',  controller: :refresh, action: :destroy
 end
