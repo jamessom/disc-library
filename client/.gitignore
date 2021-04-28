@@ -127,4 +127,16 @@ dist/
 tmp/
 temp/
 
+# SO
+.DS_Store
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
 # End of https://www.toptal.com/developers/gitignore/api/node
