@@ -1,9 +1,9 @@
 {
   "name": "theclient",
   "version": "1.0.0",
-  "description": "A Vue.js frontent app for a Rails API.",
+  "description": "A Vue.js frontend app for a Rails API.",
   "author": "Jamessom Queiroz <jamessomqueiroz@gmail.com>",
-  "private": "MIT",
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "tailwindcss": "^2.1.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -52,8 +53,9 @@
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
+    "postcss": "^8.2.13",
     "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.8",
+    "postcss-loader": "^4.0.3",
     "postcss-url": "^7.2.1",
     "prettier": "^2.2.1",
     "rimraf": "^2.6.0",
