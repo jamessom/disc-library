@@ -15,7 +15,7 @@ const plainAxiosInstance = axios.create(baseConfig);
 
 securedAxiosInstance.interceptors.request.use((config) => {
   const method = config.method.toUpperCase();
-  if (method !== 'OPTIONIS' && method !== 'GET') {
+  if (method !== 'OPTIONS' && method !== 'GET') {
     config.headers = {
       ...config.headers,
       'X-CSRF-TOKEN': localStorage.csrf,
