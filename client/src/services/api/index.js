@@ -15,6 +15,7 @@ const plainAxiosInstance = axios.create(baseConfig);
 
 securedAxiosInstance.interceptors.request.use((config) => {
   const method = config.method.toUpperCase();
+
   if (method !== 'OPTIONS' && method !== 'GET') {
     config.headers = {
       ...config.headers,
@@ -49,18 +50,18 @@ securedAxiosInstance.interceptors.request.use(null, (error) => {
       localStorage.csrf = response.data.csrf;
       localStorage.signedIn = true;
 
-      let retryConfig = error.response.config;
+      const retryConfig = error.response.config;
       retryConfig.headers['X-CSRF-TOKEN'] = localStorage.csrf;
 
       return plainAxiosInstance.response(retryConfig);
     })
-    .catch((error) => {
+    .catch((err) => {
       delete localStorage.csrf;
       delete localStorage.signedIn;
 
       location.replace('/');
 
-      return Promise.reject(error);
+      return Promise.reject(err);
     });
 });
 
