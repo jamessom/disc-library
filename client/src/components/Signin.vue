@@ -73,8 +73,8 @@ export default {
     signin() {
       this.$http.plain
         .post('/signin', { email: this.email, password: this.password })
-        .then((response) => this.signinSuccessful(response))
-        .catch((error) => this.signinFailed(error));
+        .then(response => this.signinSuccessful(response))
+        .catch(error => this.signinFailed(error));
     },
     signinSuccessful(response) {
       if (!response.data.csrf) {

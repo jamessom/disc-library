@@ -13,7 +13,7 @@ const baseConfig = {
 const securedAxiosInstance = axios.create(baseConfig);
 const plainAxiosInstance = axios.create(baseConfig);
 
-securedAxiosInstance.interceptors.request.use((config) => {
+securedAxiosInstance.interceptors.request.use(config => {
   const method = config.method.toUpperCase();
 
   if (method !== 'OPTIONS' && method !== 'GET') {
@@ -26,7 +26,7 @@ securedAxiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-securedAxiosInstance.interceptors.request.use(null, (error) => {
+securedAxiosInstance.interceptors.request.use(null, error => {
   const responseConfigStatus =
     error.response &&
     error.response.config &&
@@ -46,7 +46,7 @@ securedAxiosInstance.interceptors.request.use(null, (error) => {
         },
       },
     )
-    .then((response) => {
+    .then(response => {
       localStorage.csrf = response.data.csrf;
       localStorage.signedIn = true;
 
@@ -55,7 +55,7 @@ securedAxiosInstance.interceptors.request.use(null, (error) => {
 
       return plainAxiosInstance.response(retryConfig);
     })
-    .catch((err) => {
+    .catch(err => {
       delete localStorage.csrf;
       delete localStorage.signedIn;
 
