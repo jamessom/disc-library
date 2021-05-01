@@ -1,25 +1,25 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   env: {
-    browser: true
+    browser: true,
   },
   extends: [
     'plugin:vue/essential',
     'eslint:recommended',
     'prettier',
     'plugin:prettier/recommended',
-    'airbnb-base'
+    'airbnb-base',
   ],
   plugins: ['vue', 'prettier'],
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'build/webpack.base.conf.js'
-      }
-    }
+        config: 'build/webpack.base.conf.js',
+      },
+    },
   },
   rules: {
     'prettier/prettier': 'error',
@@ -28,22 +28,17 @@ module.exports = {
       'always',
       {
         js: 'never',
-        vue: 'never'
-      }
+        vue: 'never',
+      },
     ],
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['state', 'acc', 'e']
-      }
-    ],
+    'no-param-reassign': 0,
     'import/no-extraneous-dependencies': [
       'error',
       {
-        optionalDependencies: ['test/unit/index.js']
-      }
+        optionalDependencies: ['test/unit/index.js'],
+      },
     ],
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
-}
+    'arrow-parens': ['error', 'as-needed'],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  },
+};
