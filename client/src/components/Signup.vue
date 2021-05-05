@@ -3,7 +3,7 @@
     <div class="border p-10 border-gray-200 shadow rounded">
       <h3 class="text-2xl mb-6 text-gray-600">Sign In</h3>
       <form @submit.prevent="signin">
-        <div class="text-red" v-if="erro">{{ error }}</div>
+        <div class="text-red-600" v-if="error">{{ error }}</div>
 
         <div class="mb-6">
           <label for="email" class="label">E-mail Adress</label>
@@ -38,7 +38,9 @@
           />
         </div>
 
-        <button :class="this.buttonClasses.join(' ')">Sign Up</button>
+        <button type="submit" :class="this.buttonClasses.join(' ')">
+          Sign Up
+        </button>
 
         <div class="my-4">
           <router-link class="link" to="/">Sign In</router-link>
@@ -65,6 +67,8 @@ export default {
         'cursor-point',
         'no-underline',
         'bg-green-400',
+        'border',
+        'border-grenn-600',
         'hover:bg-green-600',
         'block',
         'w-full',
@@ -82,15 +86,25 @@ export default {
     this.checkSignedIn();
   },
   methods: {
+    setError(error, text) {
+      this.error =
+        (error.response && error.response.data && error.response.data.error) ||
+        text;
+    },
     signin() {
       this.$http.plain
-        .post('/signin', {
+        .post('/signup', {
           email: this.email,
           password: this.password,
-          passwordConfirmation: this.this.passwordConfirmation,
+          password_onfirmation: this.passwordConfirmation,
         })
         .then(response => this.signinSuccessful(response))
-        .catch(error => this.signinFailed(error));
+        .catch(error => {
+          console.log('==============================================');
+          console.log(error);
+          console.log('==============================================');
+          this.signinFailed(error);
+        });
     },
     signinSuccessful(response) {
       if (!response.data.csrf) {
@@ -100,13 +114,10 @@ export default {
 
       localStorage.csrf = response.data.csrf;
       localStorage.signedIn = true;
-      this.error = '';
       this.$router.replace('/records');
     },
     signinFailed(error) {
-      this.error =
-        (error.response && error.response.data && error.response.data.error) ||
-        'Somethinh went wrong';
+      this.setError(error, 'Somethinh went wrong');
 
       delete localStorage.csrf;
       delete localStorage.signedIn;
