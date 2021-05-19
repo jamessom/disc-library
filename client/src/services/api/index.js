@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`;
-
 const baseConfig = {
-  baseURL: BASE_URL,
+  baseURL: `http://${process.env.API_HOST}`,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
