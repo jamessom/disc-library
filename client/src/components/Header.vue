@@ -9,25 +9,25 @@
 
       <div>
         <router-link
-          class="link-gray-300 no-underline"
+          class="border rounded hover:border-white hover:bg-gray-200 py-1 px-3"
           to="/"
           v-if="!signedIn()"
           >Sign in</router-link
         >
         <router-link
-          class="link-gray-300 no-underline"
+          class="border rounded hover:border-white hover:bg-gray-200 py-1 px-3"
           to="/signup"
           v-if="!signedIn()"
           >Sign UP</router-link
         >
         <router-link
-          class="link-gray-300 no-underline"
+          class="border rounded hover:border-white hover:bg-gray-200 py-1 px-3"
           to="/records"
           v-if="signedIn()"
           >Records</router-link
         >
         <router-link
-          class="link-gray-300 no-underline"
+          class="border rounded hover:border-white hover:bg-gray-200 py-1 px-3"
           to="/artists"
           v-if="signedIn()"
           >Artists</router-link
@@ -35,7 +35,7 @@
         <a
           href="#"
           @click.prevent="signOut"
-          class="link-gray-300 no-underline"
+          class="border rounded hover:border-white hover:bg-gray-200 py-1 px-3"
           v-if="signedIn()"
         ></a>
       </div>

@@ -2,8 +2,8 @@
   <div class="max-w-sm m-auto my-8">
     <div class="border p-10 border-gray-200 shadow rounded">
       <h3 class="text-2xl mb-6 text-gray-600">Sign In</h3>
-      <form @submit.prevent="signin">
-        <div class="text-red" v-if="erro">{{ error }}</div>
+      <form @submit.prevent="signup">
+        <div class="text-red-700" v-if="error">{{ error }}</div>
 
         <div class="mb-6">
           <label for="email" class="label">E-mail Adress</label>
@@ -82,12 +82,12 @@ export default {
     this.checkSignedIn();
   },
   methods: {
-    signin() {
+    signup() {
       this.$http.plain
-        .post('/signin', {
+        .post('/signup', {
           email: this.email,
           password: this.password,
-          passwordConfirmation: this.this.passwordConfirmation,
+          password_confirmation: this.passwordConfirmation,
         })
         .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error));
